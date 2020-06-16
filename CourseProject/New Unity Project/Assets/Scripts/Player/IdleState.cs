@@ -19,7 +19,12 @@ public class IdleState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        DoMove(animator, movementController);
+        StateMacineUtil.DoMove(animator, movementController);
+        if (Input.GetKeyDown(jumpKey))
+        {
+            animator.SetBool("IsJumping", true);
+            movementController.Jump();
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

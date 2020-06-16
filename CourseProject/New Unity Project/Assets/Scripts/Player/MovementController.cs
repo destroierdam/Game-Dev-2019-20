@@ -24,10 +24,12 @@ public class MovementController : MonoBehaviour
 	public Vector2 Velocity { get => velocity; }
 
 	private new Rigidbody2D rigidbody;
+	private Animator animator;
 
 	void Start()
 	{
 		rigidbody = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
 	}
 
 	void FixedUpdate()
@@ -86,6 +88,7 @@ public class MovementController : MonoBehaviour
 			IsAirborne = false;
 			// OnJumpEnded?.Invoke();
 			velocity.y = 0;
+			animator.SetBool("IsJumping", false);
 		}
 	}
 }

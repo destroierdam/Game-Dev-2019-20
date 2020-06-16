@@ -4,7 +4,7 @@ using UnityEngine;
 using static Controls;
 using static StateMacineUtil;
 
-public class IdleState : StateMachineBehaviour
+public class RunState : StateMachineBehaviour
 {
     private Animator animator;
     private MovementController movementController;
@@ -13,7 +13,7 @@ public class IdleState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         this.animator = animator;
-        movementController = animator.GetComponent<MovementController>();
+        this.movementController = animator.GetComponent<MovementController>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

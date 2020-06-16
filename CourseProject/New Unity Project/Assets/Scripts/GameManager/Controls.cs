@@ -5,6 +5,8 @@ using UnityEngine;
 public class Controls : MonoBehaviour
 {
 	public static KeyCode attackKey = KeyCode.E;
+	public static KeyCode freezeAttackKey = KeyCode.Alpha1;
+	public static KeyCode breakAttackKey = KeyCode.Alpha2;
 	public static KeyCode jumpKey = KeyCode.W;
 	public static string HorizontalMovementAxis = "Horizontal";
 

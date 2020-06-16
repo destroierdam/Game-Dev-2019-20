@@ -46,7 +46,7 @@ public class MovementController : MonoBehaviour
 		{
 			x = velocity.x * horizontalMoveSpeed,
 			y = velocity.y
-		} * Time.deltaTime + rigidbody.position;
+		} * Time.fixedDeltaTime + rigidbody.position;
 		rigidbody.MovePosition(newPosition);
 	}
 

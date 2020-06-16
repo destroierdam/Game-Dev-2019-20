@@ -20,7 +20,9 @@ public class StateMacineUtil : MonoBehaviour
     public static void DoMove(Animator animator, MovementController movementController)
     {
         float horizontalMoveDirection = Input.GetAxisRaw(HorizontalMovementAxis);
+        Debug.Log(horizontalMoveDirection);
         movementController.SetHorizontalMoveDirection(horizontalMoveDirection);
         animator.SetFloat("NormalizedSpeed", Abs(horizontalMoveDirection));
+        animator.SetBool("IsMoving", horizontalMoveDirection != 0);
     }
 }

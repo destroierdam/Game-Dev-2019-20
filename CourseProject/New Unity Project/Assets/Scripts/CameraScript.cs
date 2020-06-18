@@ -26,11 +26,18 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 newPosition = player.transform.position + offset;
-        if (leftmostPosition <= newPosition.x  && newPosition.x <= rightmostPosition ) {
-            if (newPosition.y <= topmostPosition) {
-                this.transform.position = newPosition;
-            }
+        float newXPosition = player.transform.position.x + offset.x;
+        float newYPosition = player.transform.position.y + offset.y;
+        Vector3 newPosition = this.transform.position;
+        
+        if (leftmostPosition <= newXPosition && newXPosition <= rightmostPosition)
+        {
+            newPosition.x = newXPosition;
         }
+        if (newYPosition <= topmostPosition)
+        {
+            newPosition.y = newYPosition;
+        }
+        this.transform.position = newPosition;
     }
 }

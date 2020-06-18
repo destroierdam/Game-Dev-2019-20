@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Controls : MonoBehaviour
@@ -9,6 +10,7 @@ public class Controls : MonoBehaviour
 	public static KeyCode breakAttackKey = KeyCode.Alpha2;
 	public static KeyCode upKey = KeyCode.W;
 	public static string HorizontalMovementAxis = "Horizontal";
+	public static string VerticalMovementAxis = "Vertical";
 
 	[SerializeField]
 	private KeyCode attackKeyBinding = attackKey;

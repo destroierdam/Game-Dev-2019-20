@@ -22,9 +22,18 @@ public class IdleState : StateMachineBehaviour
         StateMacineUtil.DoMove(animator, movementController);
         if (Input.GetKeyDown(upKey))
         {
-
-            animator.SetBool("IsJumping", true);
-            movementController.Jump();
+            if (movementController.IsOnLadder)
+            {
+                animator.SetBool("IsClimbing", true);
+                animator.SetBool("IsJumping", false);
+                movementController.Climb();
+            }
+            else
+            {
+                animator.SetBool("IsJumping", true);
+                animator.SetBool("IsClimbing", false);
+                movementController.Jump();
+            }
         }
     }
 

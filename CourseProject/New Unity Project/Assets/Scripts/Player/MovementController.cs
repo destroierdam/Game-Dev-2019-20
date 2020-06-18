@@ -11,16 +11,25 @@ public class MovementController : MonoBehaviour
 	private float horizontalMoveSpeed = 2;
 
 	[SerializeField]
+	[Range(0, 5)]
+	private float verticalMoveSpeed = 2;
+
+	[SerializeField]
 	[Range(1, 5)]
 	public float gravity = 5f;
 
 	private float originalGravity;
 	public bool IsAirborne { get; set; } = false;
+	public bool IsOnLadder { get; set; } = false;
 	private readonly float movementThreshold = 0.01f;
 
 	[SerializeField]
 	[Range(1, 5)]
 	private float jumpVelocity = 2.3f;
+
+	[SerializeField]
+	[Range(1, 5)]
+	private float climbVelocity = 2f;
 
 	private Vector2 velocity = Vector2.zero;
 	public Vector2 Velocity { get => velocity; }
@@ -48,7 +57,7 @@ public class MovementController : MonoBehaviour
 		Vector2 newPosition = new Vector2
 		{
 			x = velocity.x * horizontalMoveSpeed,
-			y = velocity.y
+			y = velocity.y * verticalMoveSpeed
 		} * Time.fixedDeltaTime + rigidbody.position;
 		rigidbody.MovePosition(newPosition);
 	}
@@ -60,10 +69,18 @@ public class MovementController : MonoBehaviour
 	{
 		velocity.x = amount;
 	}
+	public void SetVerticalMoveDirection(float amount)
+	{
+		velocity.y = amount;
+	}
 	public void Jump()
 	{
 		velocity.y = jumpVelocity;
 		IsAirborne = true;
+	}
+	public void Climb()
+	{
+		velocity.y = IsOnLadder ? climbVelocity : 0;
 	}
 	private void ResolveLookDirection()
 	{
@@ -96,13 +113,13 @@ public class MovementController : MonoBehaviour
 	{
 		originalGravity = gravity;
 		gravity = 0f;
-		animator.SetBool("IsClimbing", true);
+		IsOnLadder = true;
 		Debug.Log("has entered ladder");
 	}
 	public void hasExitedLadder()
 	{
 		gravity = originalGravity;
-		animator.SetBool("IsClimbing", false);
+		IsOnLadder = false;
 		Debug.Log("has exited ladder");
 	}
 }

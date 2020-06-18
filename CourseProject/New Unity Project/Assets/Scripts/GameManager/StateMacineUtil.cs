@@ -22,6 +22,12 @@ public class StateMacineUtil : MonoBehaviour
         float horizontalMoveDirection = Input.GetAxisRaw(Controls.HorizontalMovementAxis);
         movementController.SetHorizontalMoveDirection(horizontalMoveDirection);
         animator.SetFloat("NormalizedSpeed", Abs(horizontalMoveDirection));
-        animator.SetBool("IsMoving", horizontalMoveDirection != 0);
+        // animator.SetBool("IsMoving", horizontalMoveDirection != 0);
+
+        float verticalMoveDirection = Input.GetAxisRaw(Controls.VerticalMovementAxis);
+        movementController.SetVerticalMoveDirection(verticalMoveDirection);
+        animator.SetFloat("NormalizedVerticalSpeed", Abs(verticalMoveDirection));
+
+        animator.SetBool("IsMoving", horizontalMoveDirection != 0 || verticalMoveDirection != 0);
     }
 }

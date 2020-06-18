@@ -20,8 +20,9 @@ public class IdleState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         StateMacineUtil.DoMove(animator, movementController);
-        if (Input.GetKeyDown(jumpKey))
+        if (Input.GetKeyDown(upKey))
         {
+
             animator.SetBool("IsJumping", true);
             movementController.Jump();
         }

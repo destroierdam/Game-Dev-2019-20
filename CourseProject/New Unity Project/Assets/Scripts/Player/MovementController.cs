@@ -121,4 +121,8 @@ public class MovementController : MonoBehaviour
 		IsOnLadder = false;
 		Debug.Log("has exited ladder");
 	}
+	public float LookDirection()
+	{
+		return transform.localScale.x;
+	}
 }

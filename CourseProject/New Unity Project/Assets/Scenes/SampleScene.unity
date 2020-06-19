@@ -3700,15 +3700,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4172634923440054530, guid: 4ec6abb83545b1b448898832ccbdca0f,
+        type: 3}
+      propertyPath: killedTime
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8379446672099759963, guid: 4ec6abb83545b1b448898832ccbdca0f,
         type: 3}
       propertyPath: m_Name
       value: Mushroom
       objectReference: {fileID: 0}
+    - target: {fileID: 8379446672099759963, guid: 4ec6abb83545b1b448898832ccbdca0f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8379446672099759964, guid: 4ec6abb83545b1b448898832ccbdca0f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.76
+      value: -7.167
       objectReference: {fileID: 0}
     - target: {fileID: 8379446672099759964, guid: 4ec6abb83545b1b448898832ccbdca0f,
         type: 3}

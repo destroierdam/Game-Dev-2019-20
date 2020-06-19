@@ -14,18 +14,17 @@ public class EnemyMovementController : MonoBehaviour
     private float coveredDistance = 0;
     private Vector2 velocity = new Vector2(1, 0);
     private new Rigidbody2D rigidbody;
+    [HideInInspector]
+    public bool isMoving = true;
     void Start()
     {
         this.rigidbody = GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate()
     {
-        Debug.Log(coveredDistance);
-        Move();
-        if (coveredDistance >= distance)
+        if (isMoving)
         {
-            SwapDirection();
-            coveredDistance = 0;
+            Move();
         }
     }
     private void Move()
@@ -37,6 +36,12 @@ public class EnemyMovementController : MonoBehaviour
         } * Time.fixedDeltaTime + rigidbody.position;
         rigidbody.MovePosition(newPosition);
         coveredDistance += Abs(velocity.x * speed * Time.fixedDeltaTime);
+
+        if (coveredDistance >= distance)
+        {
+            SwapDirection();
+            coveredDistance = 0;
+        }
     }
     private void SwapDirection()
     {

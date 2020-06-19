@@ -107,7 +107,6 @@ public class MovementController : MonoBehaviour
 			animator.SetBool("IsClimbing", true);
 			Debug.Log("Player entering ladder");
 		}
-		Debug.Log(collision.gameObject.tag);
 	}
 	public void hasEnteredLadder()
 	{

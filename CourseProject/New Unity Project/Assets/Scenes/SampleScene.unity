@@ -2330,7 +2330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  kickRange: 0.1
+  kickRange: 0.2
 --- !u!1 &762411047
 GameObject:
   m_ObjectHideFlags: 0
@@ -3725,7 +3725,7 @@ PrefabInstance:
     - target: {fileID: 8379446672099759964, guid: 4ec6abb83545b1b448898832ccbdca0f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.167
+      value: -5.37
       objectReference: {fileID: 0}
     - target: {fileID: 8379446672099759964, guid: 4ec6abb83545b1b448898832ccbdca0f,
         type: 3}

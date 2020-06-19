@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using static Controls;
 
 public class Attacks : MonoBehaviour
@@ -27,7 +28,7 @@ public class Attacks : MonoBehaviour
         {
             Attack();
         }
-        
+
     }
     private void ResolveAttackType()
     {
@@ -91,7 +92,20 @@ public class Attacks : MonoBehaviour
                                                  mask);
         if (hitInfo.collider != null)
         {
-            hitInfo.collider.gameObject.DestroyWall(false);
+            
+            var tilemap = hitInfo.collider.gameObject.GetComponent<Tilemap>();
+
+            Debug.Log("Hit point" + hitInfo.point);
+            var tilePos = tilemap.WorldToCell(hitInfo.point);
+
+            Debug.Log("tile location:" + tilePos);
+            Debug.Log("Tile at location" + tilemap.GetTile(tilePos));
+
+            tilemap.SetTile(tilePos, null);
+            // tilemap.SetTile(new Vector3Int(tilePos.x, tilePos.y, tilePos.z), null);
+            
+            
+            tilemap.RefreshAllTiles();
         }
     }
 }

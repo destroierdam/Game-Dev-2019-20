@@ -2,6 +2,7 @@
 using System;
 using static UnityEngine.Mathf;
 using UnityEditor.Experimental.AssetImporters;
+//using System.Numerics;
 
 public class MovementController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class MovementController : MonoBehaviour
 
 	[SerializeField]
 	[Range(0, 5)]
-	private float verticalMoveSpeed = 2;
+	private float verticalMoveSpeed = 1;
 
 	[SerializeField]
 	[Range(1, 5)]
@@ -54,10 +55,16 @@ public class MovementController : MonoBehaviour
 	}
 	private void Move()
 	{
+		float verticalVelocity = velocity.y;
+		if (IsOnLadder)
+		{
+			verticalVelocity = velocity.y * climbVelocity;
+		} 
+
 		Vector2 newPosition = new Vector2
 		{
 			x = velocity.x * horizontalMoveSpeed,
-			y = velocity.y * verticalMoveSpeed
+			y = verticalVelocity
 		} * Time.fixedDeltaTime + rigidbody.position;
 		rigidbody.MovePosition(newPosition);
 	}
@@ -72,15 +79,17 @@ public class MovementController : MonoBehaviour
 	public void SetVerticalMoveDirection(float amount)
 	{
 		velocity.y = amount;
+		if (!IsOnLadder)
+		{
+			velocity.y *= jumpVelocity;
+		}
 	}
 	public void Jump()
 	{
-		velocity.y = jumpVelocity;
-		IsAirborne = true;
-	}
-	public void Climb()
-	{
-		velocity.y = IsOnLadder ? climbVelocity : 0;
+		if (!IsOnLadder) { 
+			velocity.y = jumpVelocity;
+			IsAirborne = true;
+		}
 	}
 	private void ResolveLookDirection()
 	{
@@ -108,18 +117,28 @@ public class MovementController : MonoBehaviour
 			Debug.Log("Player entering ladder");
 		}
 	}
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		if (collision.gameObject.CompareTag("Ladder"))
+		{
+			animator.SetBool("IsClimbing", false);
+			Debug.Log("Player entering ladder");
+		}
+	}
 	public void hasEnteredLadder()
 	{
 		originalGravity = gravity;
 		gravity = 0f;
 		IsOnLadder = true;
 		Debug.Log("has entered ladder");
+		animator.SetBool("IsClimbing", true);
 	}
 	public void hasExitedLadder()
 	{
 		gravity = originalGravity;
 		IsOnLadder = false;
 		Debug.Log("has exited ladder");
+		animator.SetBool("IsClimbing", false);
 	}
 	public float LookDirection()
 	{

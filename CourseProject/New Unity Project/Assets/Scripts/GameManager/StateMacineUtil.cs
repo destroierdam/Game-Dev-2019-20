@@ -27,7 +27,6 @@ public class StateMacineUtil : MonoBehaviour
         float verticalMoveDirection = Input.GetAxisRaw(Controls.VerticalMovementAxis);
         movementController.SetVerticalMoveDirection(verticalMoveDirection);
         animator.SetFloat("NormalizedVerticalSpeed", Abs(verticalMoveDirection));
-
         animator.SetBool("IsMoving", horizontalMoveDirection != 0 || verticalMoveDirection != 0);
     }
 }

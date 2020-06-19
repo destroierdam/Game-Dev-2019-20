@@ -99,7 +99,7 @@ public class Attacks : MonoBehaviour
             var tilePos = tilemap.WorldToCell(hitInfo.point);
 
             Debug.Log("tile location:" + tilePos);
-            Debug.Log("Tile at location" + tilemap.GetTile(tilePos));
+            Debug.Log("Tile at location: " + tilemap.GetTile(tilePos));
 
             tilemap.SetTile(tilePos, null);
             // tilemap.SetTile(new Vector3Int(tilePos.x, tilePos.y, tilePos.z), null);

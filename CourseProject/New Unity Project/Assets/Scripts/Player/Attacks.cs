@@ -6,7 +6,9 @@ using static Controls;
 public class Attacks : MonoBehaviour
 {
     [SerializeField]
-    private float attackRange = 2;
+    private float attackRange = 2f;
+    [SerializeField]
+    private float kickRange = 0.2f;
     private Animator animator;
     private MovementController movementController;
     void Start()
@@ -19,6 +21,7 @@ public class Attacks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ResolveAttackType();
         bool isAttacking = Input.GetKeyDown(Controls.attackKey);
         if (isAttacking)
         {
@@ -26,7 +29,7 @@ public class Attacks : MonoBehaviour
         }
         
     }
-    private void Attack()
+    private void ResolveAttackType()
     {
         bool freezeAttack = Input.GetKeyDown(Controls.freezeAttackKey);
         bool breakAttack = Input.GetKeyDown(Controls.breakAttackKey);
@@ -38,9 +41,23 @@ public class Attacks : MonoBehaviour
         {
             this.animator.SetInteger("AttackType", 2);
         }
+    }
+    private void Attack()
+    {
         this.animator.SetBool("Attacking", true);
 
-        Shoot();
+        switch (this.animator.GetInteger("AttackType"))
+        {
+            case 1:
+                Shoot();
+                break;
+            case 2:
+                Kick();
+                break;
+            default:
+                Debug.LogError("Unknown attack type");
+                break;
+        }
     }
     private void Shoot()
     {
@@ -61,6 +78,20 @@ public class Attacks : MonoBehaviour
                     enemy.Shot();
                 }
             }
+        }
+    }
+    private void Kick()
+    {
+        int mask = LayerMask.GetMask("Destructable Walls");
+        Vector3 origin = this.transform.position;
+        Vector3 direction = new Vector3(movementController.LookDirection(), 0);
+        RaycastHit2D hitInfo = Physics2D.Raycast(origin,
+                                                 direction,
+                                                 kickRange,
+                                                 mask);
+        if (hitInfo.collider != null)
+        {
+            hitInfo.collider.gameObject.DestroyWall(false);
         }
     }
 }

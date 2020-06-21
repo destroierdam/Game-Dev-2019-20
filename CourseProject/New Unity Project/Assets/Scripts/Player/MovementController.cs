@@ -104,7 +104,7 @@ public class MovementController : MonoBehaviour
 	}
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (collision.gameObject.CompareTag("Ground"))
+		if (collision.gameObject.CompareTag("Ground") && velocity.y <= 0)
 		{
 			IsAirborne = false;
 			// OnJumpEnded?.Invoke();

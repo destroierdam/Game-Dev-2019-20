@@ -70,7 +70,7 @@ public class MovementController : MonoBehaviour
 	}
 	private void Fall()
 	{
-		velocity.y -= gravity * Time.deltaTime;
+		velocity.y -= gravity * Time.fixedDeltaTime;
 	}
 	public void SetHorizontalMoveDirection(float amount)
 	{

@@ -9,10 +9,12 @@ public class EnemyLifecycleController : MonoBehaviour
     private int killedTime = 5;
     private Animator animator;
     private EnemyMovementController movementController;
+    private Rigidbody2D rigidBody;
     void Start()
     {
         animator = GetComponent<Animator>();
         movementController = GetComponent<EnemyMovementController>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
     public void Shot()
     {
@@ -23,11 +25,13 @@ public class EnemyLifecycleController : MonoBehaviour
     {
         animator.SetBool("Frozen", true);
         movementController.isMoving = false;
+        rigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
     }
     private IEnumerator Revive(float time)
     {
         yield return new WaitForSeconds(time);
         animator.SetBool("Frozen", false);
         movementController.isMoving = true;
+        rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }

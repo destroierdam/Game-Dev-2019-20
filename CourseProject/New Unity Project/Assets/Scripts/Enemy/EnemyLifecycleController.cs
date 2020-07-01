@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class EnemyLifecycleController : MonoBehaviour
     private Animator animator;
     private EnemyMovementController movementController;
     private Rigidbody2D rigidBody;
+    private bool isFrozen;
+    public bool IsFrozen { get => isFrozen; }
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -26,6 +29,7 @@ public class EnemyLifecycleController : MonoBehaviour
         animator.SetBool("Frozen", true);
         movementController.isMoving = false;
         rigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+        isFrozen = true;
     }
     private IEnumerator Revive(float time)
     {
@@ -33,5 +37,6 @@ public class EnemyLifecycleController : MonoBehaviour
         animator.SetBool("Frozen", false);
         movementController.isMoving = true;
         rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        isFrozen = false;
     }
 }

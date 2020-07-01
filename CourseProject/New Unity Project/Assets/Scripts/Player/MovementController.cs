@@ -2,6 +2,7 @@
 using System;
 using static UnityEngine.Mathf;
 using UnityEditor.Experimental.AssetImporters;
+using System.Runtime.InteropServices.ComTypes;
 //using System.Numerics;
 
 public class MovementController : MonoBehaviour
@@ -115,6 +116,14 @@ public class MovementController : MonoBehaviour
 		{
 			animator.SetBool("IsClimbing", true);
 			Debug.Log("Player entering ladder");
+		}
+		if (collision.gameObject.CompareTag("Enemy"))
+		{
+			var enemy = collision.gameObject.GetComponent<EnemyLifecycleController>();
+			if (enemy != null && enemy.IsFrozen == false)
+			{
+				animator.SetTrigger("Die");
+			}
 		}
 	}
 	private void OnCollisionExit2D(Collision2D collision)
